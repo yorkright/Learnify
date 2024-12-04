@@ -1,0 +1,76 @@
+
+
+
+      <div
+        style={{
+          backgroundColor: bgColor, // Dynamically set background color
+          minHeight: '100vh',  // Ensures the full screen height is used
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          transition: 'background-color 0.5s ease',  // Smooth color transition
+        }}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <h1 style={{ color: '#333' }}>Welcome to the HTML, CSS, and JS Demo!</h1>
+
+          <p style={{ color: '#555', fontSize: '18px' }}>
+            This page demonstrates how HTML, CSS, and JavaScript work together in a web page.
+          </p>
+
+          <button
+            onClick={changeBackgroundColor}  // JavaScript logic: change color on click
+            style={{
+              padding: '20px 40px',
+              fontSize: '16px',
+              backgroundColor: '#fff',
+              border: '2px solid #000',
+              cursor: 'pointer',
+              borderRadius: '8px',
+              transition: 'transform 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'scale(1.1)'; // Slight scale effect on hover
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = 'scale(1)'; // Return to normal size
+            }}
+          >
+            Change Background Color
+          </button>
+
+          <p style={{ marginTop: '20px', color: '#888' }}>
+            The background color changes based on JavaScript logic (using React hooks).
+          </p>
+
+          <div style={{ marginTop: '40px', fontSize: '16px', color: '#666' }}>
+            <h3>Explanation:</h3>
+            <ul>
+              <li><strong>HTML (JSX):</strong> The structure and elements are written using JSX, which looks like HTML but is inside JavaScript.</li>
+              <li><strong>CSS:</strong> We use inline styles to style the elements. You can also apply external CSS if preferred.</li>
+              <li><strong>JavaScript (React):</strong> We use React s <code>useState</code> hook to manage the background color and handle events like button clicks.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div className="min-h-screen  p-6">
+        <header className="text-center mb-8">
+          <h1 className="text-4xl font-semibold text-slate-200">Welcome to the LMS</h1>
+          <p className="text-lg mt-2 text-white">Learn new skills and advance your career.</p>
+        </header>
+
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {courses.map((course) => (
+            <div key={course.id} className="bg-white shadow-md rounded-lg p-6">
+              <h2 className="text-2xl font-semibold">{course.title}</h2>
+              <p className="mt-2 text-gray-600">{course.description}</p>
+              <Link href={`/course/${course.id}`}
+                className="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                Click
+              </Link>
+            </div>
+          ))}
+        </section>
+      </div>
