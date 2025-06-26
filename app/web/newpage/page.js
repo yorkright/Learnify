@@ -1,112 +1,142 @@
 /* eslint-disable @next/next/no-img-element */
-// pages/learning.js
+// pages/index.js
 import Link from 'next/link';
+import React from 'react';
 
-const LearningPage = () => {
-    return (
-<div className="">
-       <div>
-      <div className="max-w-4xl mx-auto p-8">
-      <li>
-        <Link href="/web/newpage/aginnew">Go to New Page</Link>
-      </li>
-      <header className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-blue-100">Learn HTML, CSS, and JavaScript</h1>
-        <p className="text-xl text-gray-200 mt-4">A beginners guide to web development</p>
+const FrontendCoursePage = () => {
+  return (
+    <div className=" min-h-screen pt-32 p-6">
+      {/* Header Section */}
+      <header className="text-center py-6 ">
+        <h1 className="text-4xl font-bold text-gray-950">Master Frontend Web Development</h1>
+        <p className="text-gray-900 mt-2">Learn the skills to build stunning websites and web applications.</p>
       </header>
-    
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-200 mb-4">HTML: The Structure of a Web Page</h2>
-        <p className="text-lg text-gray-200 mb-4">
-          HTML (Hypertext Markup Language) is the standard language used to create web pages.
-          It provides the structure for web content. Here an example of HTML code:
-        </p>
-        <pre className="bg-gray-800 text-white p-4 rounded-lg">
-          <code>{`<html>
-      <head>
-        <title>My Web Page</title>
-      </head>
-      <body>
-        <h1>Hello, world!</h1>
-        <p>Welcome to my web page.</p>
-      </body>
-    </html>`}</code>
-        </pre>
-      </section>
-    
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-200 mb-4">CSS: Styling Your Web Page</h2>
-        <p className="text-lg text-gray-200 mb-4">
-          CSS (Cascading Style Sheets) is used to style the content created with HTML. It controls
-          the layout, colors, fonts, and more. Heres an example of CSS code:
-        </p>
-        <pre className="bg-gray-800 text-white p-4 rounded-lg">
-          <code>{`body {
-      background-color: #f4f4f4;
-      font-family: Arial, sans-serif;
-    }
-    
-    h1 {
-      color: #3498db;
-    }
-    
-    p {
-      font-size: 18px;
-      color: #333;
-    }`}</code>
-        </pre>
-      </section>
-    
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-200 mb-4">JavaScript: Making Your Page Interactive</h2>
-        <p className="text-lg text-gray-200 mb-4">
-          JavaScript is a programming language that allows you to create interactive effects on your web pages.
-          Here an example of JavaScript:
-        </p>
-        <pre className="bg-gray-800 text-white p-4 rounded-lg">
-          <code>{`<button onclick="alert('Hello, world!')">Click Me</button>`}</code>
-        </pre>
-        <p className="text-lg text-gray-200 mt-4">
-          The JavaScript code above will show an alert when the button is clicked.
-        </p>
-      </section>
-    </div>
-    
-    </div>
 
-            
+
+      <div className="ml-6  mt-6 flex justify-center items-center ">
+      <h1 className="text-4xl font-bold text-gray-950">Diffrence Between Typescript and Javascript</h1>
+      </div>
+
       <section className="text-gray-600 body-font">
-        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-100"> Simple Project for
-              <br className="hidden lg:inline-block text-white" />logic building or basics clearation
-            </h1>
-            <p className="mb-8 leading-relaxed text-gray-100">-</p>
-            <div className="flex justify-center">
-              <Link href="https://github.com/yorkright?tab=repositories">
-                <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none  hover:bg-indigo-600 rounded text-lg">GitHub</button>
-              </Link>
-              <Link href="https://github.com/yorkright?tab=repositories">
-                <button
-                 className=" ml-3 inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none  hover:bg-indigo-600 rounded text-lg">
-                    Code
-                    </button>
-              </Link>
-
-
-            </div>
+  
+  <div className="container px-5 py-24 mx-auto flex flex-wrap">
+    <div className="flex flex-wrap m-4">
+      
+      <div className="p-4 lg:w-1/2 md:w-full">
+        <div className="flex border-2 rounded-xl border-gray-900 border-opacity-50 p-8 sm:flex-row flex-col">
+          <div className="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+         
           </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img className="object-cover object-center rounded" alt="hero" src="https://plus.unsplash.com/premium_photo-1685086785054-d047cdc0e525?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8d2ViJTIwZGV2ZWxvcG1lbnR8ZW58MHx8MHx8fDA%3D" />
+          
+          <div className="flex-grow">
+            <h2 className=" text-xl text-green-600 title-font font-extrabold mb-3">Typescript</h2>
+            <p className="leading-relaxed text-base text-black">TypeScript: A superset of JavaScript developed by Microsoft. It adds static typing and other features to JavaScript, making code more robust and easier to maintain.</p>
+            <Link  href='/typescript' >
+        <button className="mt-3 text-indigo-500  inline-flex items-center">Learn More
+        </button>
+        </Link>
           </div>
+        </div>
+      </div>
+      <div className="p-4 lg:w-1/2 md:w-full">
+        <div className="flex border-2 rounded-xl border-gray-900 border-opacity-50 p-8 sm:flex-row flex-col">
+          <div className="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+          
+          </div>
+          <div className="flex-grow">
+            <h2 className=" text-lg text-green-600 title-font font-extrabold mb-3">Javascript</h2>
+            <p className="leading-relaxed text-base text-black">JavaScript: A lightweight, interpreted programming language primarily used for adding interactivity to web pages. It’s a client-side scripting language that can also run on the server-side using environments like Node.js</p>
+            <Link  href='/typescript' >
+        <button className="mt-3 text-indigo-500  inline-flex items-center">Learn More
+        </button>
+        </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+      {/* Courses Section */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        {/* Course Card 2 */}
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          <img
+            src="https://www.pragimtech.com/wp-content/uploads/2019/03/java-script.jpg"
+            alt="JavaScript Essentials"
+            className="w-full h-48 object-cover"
+          />
+          <div className="p-4">
+            <h2 className="text-xl font-semibold text-gray-800">JavaScript Essentials</h2>
+            <p className="text-gray-600 mt-2">
+              Master JavaScript to create dynamic and interactive web experiences.
+            </p>
+            <Link href={'/king'}>
+                <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Enroll Now</button>
+              </Link>
+          </div>
         </div>
 
+        {/* Course Card 3 */}
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          <img
+            src="https://qualitythought.in/wp-content/uploads/2024/08/the_future_of_web_development_reactjs.webp"
+            alt="React & TailwindCSS"
+            className="w-full h-48 object-cover"
+          />
+          <div className="p-4">
+            <h2 className="text-xl font-semibold text-gray-800">React & TailwindCSS</h2>
+            <p className="text-gray-600 mt-2">
+              Build modern, responsive UIs with React and TailwindCSS.
+            </p>
+            <Link href={'/react'}>
+                <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Enroll Now</button>
+              </Link>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+              <img
+                src="/next11.png"
+                alt="Course img"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-2xl font-semibold mb-4 text-black">Next js</h3>
+                <p className="text-gray-700 mb-4">Next.js is a React framework that helps developers build web applications:</p>
+                <Link href={'/next'}>
+                <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Enroll Now</button>
+              </Link>
+              </div>
+            </div>
 
       </section>
-        </div> 
-        
-    );
+
+      <section id="courses" className="py-20 ">
+        <div className="container mx-auto text-center text-white">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+              <img
+                src="https://cdn.pixabay.com/photo/2020/07/31/05/44/server-5451985_640.jpg"
+                alt="Course img"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold mb-4 text-black">Typescript</h3>
+                <p className="text-gray-700 mb-4">TypeScript: A superset of JavaScript developed by Microsoft.</p>
+                <Link href={'/typescript'}>
+                <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Enroll Now</button>
+              </Link>
+              
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
 };
 
-export default LearningPage;
+export default FrontendCoursePage;

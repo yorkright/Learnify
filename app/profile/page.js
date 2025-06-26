@@ -1,43 +1,30 @@
-"use client"
-import React from 'react'
-import Link from 'next/link'
-import { useSession, signIn, signOut } from "next-auth/react"
+ 
+ "use client";
+import React from "react";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 
+const Profile = () => {
+  const { data: session } = useSession();
 
+  return (
+    <div className="pt-32 px-4 min-h-screen flex justify-center items-start bg-gray-900">
+      {session ? (
+        <div className="w-full max-w-2xl">
+          <div className="shadow-lg rounded-lg overflow-hidden bg-white">
+            <div className="h-32 bg-gradient-to-r from-purple-500 to-blue-500"></div>
+            <div className="relative -mt-16 flex flex-col items-center p-4">
+              {/* Profile Picture (optional) */}
+              {/* <Image src="/profile.jpg" alt="profile" width={80} height={80} className="rounded-full border-4 border-white" /> */}
 
-const Proflie = () => {
-    const { data: session } = useSession()
+              <h1 className="mt-4 text-xl font-bold text-gray-800">{session.user.name}</h1>
+              <p className="text-gray-500">Full Stack Web Developer</p>
 
-
-
-    return (
-        <>
-
-  <div className="flex justify-center items-center">
-                {session &&
-
-                    <><div className="min-h-[6vh] flex items-center  justify-center py-10">
-                        <div className=" shadow-lg rounded-lg overflow-hidden max-w-2xl w-full">
-                            {/* Header Section */}
-                            <div className=" h-32"></div>
-                            <div className="relative -mt-16 flex flex-col items-center">
-                                {/* Profile Picture */}
-                                <div className="w-52 h-64 relative">
-                                    <Image
-                                        src="/IMG_20240929_171714114_HDR~3.jpg" // Replace with your image in the public folder
-                                        alt="Profile Picture"
-                                        className="rounded-full border-4 border-white shadow-md"
-                                        layout="fill"
-                                        objectFit="cover" />
-                                </div>
-
-                                {/* Name and Title */}
-                                <h1 className="mt-4 text-xl font-bold text-gray-200">{session.user.name}</h1>
-                                <p className="text-gray-500">Full Stack Web  Developer</p>
-
-                                {/* Social Media Links */}
-                                <div className="flex mt-4 space-x-4">
+              {/* Social Links */}
+              <div className="flex mt-4 space-x-4">
+                
+ <div className="flex mt-4 space-x-4">
                                     <a
                                         href="https://twitter.com"
                                         target="_blank"
@@ -84,27 +71,51 @@ const Proflie = () => {
                                         </svg>
                                     </a>
                                 </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <button
-                        className="  text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-e-xl text-sm px-5 py-2.5 text-center me-2 mb-2"
-                        onClick={() => { signOut(); } }>
-                            LogOut
-                        </button></>}
-
-                <Link href={"/login"}>
-                    <button
-                        className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-e-xl text-sm px-5 py-2.5 text-center me-2 mb-2"
-                    >
-                        Login Details-
-                    </button></Link>
-
-
+              </div>
             </div>
-        </>
-    )
-}
+          </div>
 
-export default Proflie
+          <button
+            className="mt-6 w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 text-center"
+            onClick={() => signOut()}
+          >
+            Log Out
+          </button>
+        </div>
+      ) : (
+        <Link href="/login">
+          <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 text-center">
+            Login Details
+          </button>
+        </Link>
+      )}
+    </div>
+  );
+};
+
+const SocialLink = ({ href, color }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`${color} hover:opacity-80`}
+  >
+    <svg
+      className="w-6 h-6"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Sample icon path (Twitter) */}
+      <path d="M24 4.557a9.93 9.93 0 01-2.828.775..." />
+    </svg>
+  </a>
+);
+
+export default Profile;
+
+ 
+ 
+ 
+ 
+ 
