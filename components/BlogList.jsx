@@ -30,7 +30,7 @@ const BlogList = () => {
     );
 
   return (
-    <div className="pt-28 px-4 sm:pt-32 min-h-screen">
+    <div className="bg-white pt-28 px-4 sm:pt-32 min-h-screen">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
         {/* Left Section */}
         <div className="flex-1">
