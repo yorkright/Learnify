@@ -1,4 +1,4 @@
-Here is the full api code import { connectDB } from "@/lib/db";
+import { connectDB } from "@/lib/db";
 import BlogModel from "@/lib/models/BlogModels";
 import { writeFile } from "fs/promises";
 import { NextResponse } from "next/server";
