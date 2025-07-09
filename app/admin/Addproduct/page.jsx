@@ -64,26 +64,25 @@ const Page = () => {
   };
 
   return (
-    <form
+  <form
   onSubmit={onSubmitHandler}
-  className="max-w-5xl w-full mx-auto mt-10 p-6 sm:p-10  dark:bg-slate-800 rounded-xl shadow-md"
->  <br /><br /><br />
-  <h2 className="text-2xl font-bold text-gray-200 dark:text-white mb-6">Add New Blog Post</h2>
+  className="max-w-5xl w-full mx-auto mt-10 p-6 sm:p-10 bg-white rounded-xl shadow-md"
+>
+  <h2 className="text-2xl font-bold text-gray-800 mb-6">Add New Blog Post</h2>
 
   {/* Thumbnail Upload */}
-  <label htmlFor="image" className="block text-lg font-medium text-gray-100 dark:text-gray-200">
+  <label htmlFor="image" className="block text-lg font-medium text-gray-800">
     Upload Thumbnail
-
-  <div className="mt-3">
-    <Image
-      src={image ? URL.createObjectURL(image) : assets.upload_area}
-      width={200}
-      height={100}
-      alt="Thumbnail Preview"
-      className="rounded-lg border-2 border-dashed border-gray-400 cursor-pointer hover:opacity-80 transition duration-300"
-    />
-  </div>
-    </label>
+    <div className="mt-3">
+      <Image
+        src={image ? URL.createObjectURL(image) : assets.upload_area}
+        width={200}
+        height={100}
+        alt="Thumbnail Preview"
+        className="rounded-lg border-2 border-dashed border-gray-300 cursor-pointer hover:opacity-80 transition duration-300"
+      />
+    </div>
+  </label>
 
   <input
     onChange={(e) => setImage(e.target.files[0])}
@@ -95,58 +94,59 @@ const Page = () => {
   />
 
   {/* Blog Title */}
-  <label className="block mt-6 text-lg font-medium text-gray-100 dark:text-gray-200">
+  <label className="block mt-6 text-lg font-medium text-gray-800">
     Blog Title
-  <input
-    name="title"
-    onChange={onChangeHandler}
-    value={data.title}
-    className="mt-2 w-full px-4 py-3 text-black rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black dark:bg-gray-900 dark:text-white dark:border-gray-600"
-    type="text"
-    placeholder="Enter blog title"
-    required
-  />
+    <input
+      name="title"
+      onChange={onChangeHandler}
+      value={data.title}
+      className="mt-2 w-full px-4 py-3 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+      type="text"
+      placeholder="Enter blog title"
+      required
+    />
   </label>
 
   {/* Blog Description */}
-  <label className="block mt-6 text-lg font-medium text-gray-100 dark:text-gray-200">
+  <label className="block mt-6 text-lg font-medium text-gray-800">
     Blog Description
-  <textarea
-    name="description"
-    onChange={onChangeHandler}
-    value={data.description}
-    className="mt-2 w-full px-4 py-3 text-black rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black dark:bg-gray-900 dark:text-white dark:border-gray-600"
-    rows={6}
-    placeholder="Write blog content here"
-    required
-  />
+    <textarea
+      name="description"
+      onChange={onChangeHandler}
+      value={data.description}
+      className="mt-2 w-full px-4 py-3 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+      rows={6}
+      placeholder="Write blog content here"
+      required
+    />
   </label>
 
   {/* Blog Category */}
-  <label className="block mt-6 text-lg font-medium text-gray-100 dark:text-gray-200">
+  <label className="block mt-6 text-lg font-medium text-gray-800">
     Blog Category <br />
-  <select
-    name="category"
-    onChange={onChangeHandler}
-    value={data.category}
-    className="mt-2 w-full sm:w-1/2 px-4 py-3 rounded-md border border-gray-300 bg-white text-gray-700 dark:bg-gray-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-black"
-  >
-    <option value="Frontend">Frontend</option>
-    <option value="Backend">Backend</option>
-    <option value="Git/GitHub">Git/GitHub</option>
-  </select>
+    <select
+      name="category"
+      onChange={onChangeHandler}
+      value={data.category}
+      className="mt-2 w-full sm:w-1/2 px-4 py-3 rounded-md border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option value="Frontend">Frontend</option>
+      <option value="Backend">Backend</option>
+      <option value="Git/GitHub">Git/GitHub</option>
+    </select>
   </label>
 
   {/* Submit Button */}
   <div className="mt-8 flex justify-center sm:justify-start">
     <button
       type="submit"
-      className="w-full sm:w-40 py-3 rounded-md bg-white text-black hover:bg-gray-900     transition duration-300"
+      className="w-full sm:w-40 py-3 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition duration-300"
     >
       Add
     </button>
   </div>
 </form>
+
 
   );
 };
