@@ -3,6 +3,34 @@ import BlogModel from "@/lib/models/BlogModels";
 import { writeFile } from "fs/promises";
 import { NextResponse } from "next/server";
 import fs from "fs";
+import formidable from 'formidable';
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const form = new formidable.IncomingForm();
+    form.parse(req, async (err, fields, files) => {
+      if (err) {
+        res.status(500).json({ success: false, msg: 'Form parse error', error: err.message });
+        return;
+      }
+      // Handle fields and files
+      try {
+        // Save blog to DB here
+        res.status(200).json({ success: true, msg: 'Blog added successfully.' });
+      } catch (dbError) {
+        res.status(500).json({ success: false, msg: 'Database error', error: dbError.message });
+      }
+    });
+  } else {
+    res.status(405).json({ success: false, msg: 'Method not allowed' });
+  }
+}
+
 
 // ✅ GET: Fetch single or all blogs
 export async function GET(request) {
