@@ -20,108 +20,89 @@ const Page = () => {
     fetchTotalBlogs();
   }, []);
 
-
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-4xl mx-auto pt-36">
-        <h1 className="text-3xl font-bold mb-6 text-black bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-purple-600">
+    <div className="min-h-screen p-4 sm:p-8 bg-white text-gray-800">
+      <div className="max-w-6xl mx-auto pt-20">
+        <h1 className="text-4xl font-extrabold mb-10 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
           Admin Dashboard
         </h1>
-        <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="  bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg shadow-lg hover:shadow-black-700/90 p-6">
-            <h2 className="text-xl font-semibold mb-2 text-gray-900">
-              Total Blogs
-            </h2>
-            <p className="text-3xl font-bold text-gray-900">{totalBlogs}</p>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 hover:shadow-md transition duration-300">
+            <h2 className="text-lg font-medium text-gray-600">Total Blogs</h2>
+            <p className="text-4xl font-bold text-blue-600 mt-2">{totalBlogs}</p>
           </div>
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg shadow-lg hover:shadow-gray-700/90 p-6">
-            <h2 className="text-xl font-semibold mb-2 text-blue-400">
-              Active Users
-            </h2>
-            <p className="text-3xl font-bold text-green-600">56</p>
+
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 hover:shadow-md transition duration-300">
+            <h2 className="text-lg font-medium text-gray-600">Active Users</h2>
+            <p className="text-4xl font-bold text-green-500 mt-2">56</p>
           </div>
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg shadow-lg hover:shadow-blue-700/90 p-6">
-            <h2 className="text-xl font-semibold mb-2 text-blue-400">
-              Total Views
-            </h2>
-            <p className="text-3xl font-bold text-purple-600">0</p>
+
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 hover:shadow-md transition duration-300">
+            <h2 className="text-lg font-medium text-gray-600">Total Views</h2>
+            <p className="text-4xl font-bold text-purple-500 mt-2">0</p>
           </div>
         </div>
-        <div className="  p-6">
-          <div className="grid gap-4">
-            <div className="bg-gray-800/50 backdrop-blur border border-gray-700 p-4 shadow-lg hover:shadow-blue-700/90 rounded-lg flex items-center">
+
+        {/* Functional Cards */}
+        <div className="grid gap-6 md:grid-cols-2">
+          {[
+            {
+              title: "Users",
+              description: "Manage user accounts and permissions",
+              icon: "👤",
+            },
+            {
+              title: "Content",
+              description: "Manage website content and posts",
+              icon: "📝",
+            },
+            {
+              title: "Settings",
+              description: "Configure system settings",
+              icon: "⚙️",
+            },
+            {
+              title: "Blogs",
+              description: "Manage blog posts, categories, and comments",
+              icon: "📚",
+            },
+            {
+              title: "Analytics",
+              description: "View blog performance and user engagement",
+              icon: "📊",
+            },
+          ].map((card, i) => (
+            <div
+              key={i}
+              className="flex items-start gap-4 p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-300"
+            >
+              <span className="text-3xl">{card.icon}</span>
               <div>
-                <h2 className="text-xl font-semibold mb-2 text-blue-400">
-                  Users
-                </h2>
-                <p className="text-gray-300">
-                  Manage user accounts and permissions
-                </p>
+                <h3 className="text-lg font-semibold text-gray-800">
+                  {card.title}
+                </h3>
+                <p className="text-gray-600">{card.description}</p>
               </div>
             </div>
-            <div className="bg-gray-800/50 backdrop-blur border border-gray-700 shadow-lg hover:shadow-blue-700/90 p-4 rounded-lg flex items-center">
-              <div>
-                <h2 className="text-xl font-semibold mb-2 text-blue-400">
-                  Content
-                </h2>
-                <p className="text-gray-300">
-                  Manage website content and posts
-                </p>
-              </div>
-            </div>
-            <div className="bg-gray-800/50 backdrop-blur border border-gray-700 shadow-lg hover:shadow-blue-700/90 p-4 rounded-lg flex items-center">
-              <div>
-                <h2 className="text-xl font-semibold mb-2 text-blue-400">
-                  Settings
-                </h2>
-                <p className="text-gray-300">Configure system settings</p>
-              </div>
-            </div>
-            <div className="bg-gray-800/50 backdrop-blur border border-gray-700 shadow-lg hover:shadow-blue-700/90 p-4 rounded-lg flex items-center">
-              <span className="text-green-500 mr-2 text-3xl font-extrabold">
-                ✓
-              </span>
-              <div>
-                <h2 className="text-xl font-semibold mb-2 text-blue-400">
-                  Blogs
-                </h2>
-                <p className="text-gray-300">
-                  Manage blog posts, categories, and comments
-                </p>
-              </div>
-            </div>
-            <div className="bg-gray-800/50 backdrop-blur border border-gray-700 shadow-lg hover:shadow-blue-700/90 p-4 rounded-lg flex items-center">
-              <span className="text-green-500 mr-2 text-3xl font-extrabold">
-                ✓
-              </span>
-              <div>
-                <h2 className="text-xl font-semibold mb-2 text-blue-400">
-                  Analytics
-                </h2>
-                <p className="text-gray-300">
-                  View blog performance and user engagement
-                </p>
-              </div>
-            </div>
-            <div className="bg-gray-800/50 backdrop-blur border border-gray-700 shadow-lg hover:shadow-blue-700/90 p-4 rounded-lg flex items-center">
-              <span className="text-green-500 mr-2 text-3xl font-extrabold">
-                🤔
-              </span>
-              <div>
-                <h2 className="text-xl font-semibold mb-2 text-blue-400">
-                  Logout
-                </h2>
-                <button
-                  onClick={() =>
-                    fetch("/api/logout", { method: "POST" }).then(
-                      () => (window.location.href = "/login")
-                    )
-                  }
-                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200 mb-6"
-                >
-                  Logout
-                </button>
-              </div>
+          ))}
+
+          {/* Logout Button */}
+          <div className="flex items-start gap-4 p-6 bg-white border border-red-100 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+            <span className="text-3xl text-red-500">🚪</span>
+            <div>
+              <h3 className="text-lg font-semibold text-red-600">Logout</h3>
+              <button
+                onClick={() =>
+                  fetch("/api/logout", { method: "POST" }).then(
+                    () => (window.location.href = "/login")
+                  )
+                }
+                className="mt-2 bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>
