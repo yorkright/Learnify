@@ -24,17 +24,17 @@ const Page = () => {
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto pt-36">
-        <h1 className="text-3xl font-bold mb-6 text-blue-400 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+        <h1 className="text-3xl font-bold mb-6 text-black bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-purple-600">
           Admin Dashboard
         </h1>
         <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="  bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg shadow-lg hover:shadow-blue-700/90 p-6">
-            <h2 className="text-xl font-semibold mb-2 text-blue-400">
+          <div className="  bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg shadow-lg hover:shadow-black-700/90 p-6">
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">
               Total Blogs
             </h2>
-            <p className="text-3xl font-bold text-blue-600">{totalBlogs}</p>
+            <p className="text-3xl font-bold text-gray-900">{totalBlogs}</p>
           </div>
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg shadow-lg hover:shadow-blue-700/90 p-6">
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg shadow-lg hover:shadow-gray-700/90 p-6">
             <h2 className="text-xl font-semibold mb-2 text-blue-400">
               Active Users
             </h2>
