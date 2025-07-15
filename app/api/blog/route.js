@@ -1,13 +1,10 @@
-// app/api/blog/route.js
 import { connectDB } from "@/lib/db";
 import BlogModel from "@/lib/models/BlogModels";
-import { writeFile, unlink } from "fs/promises";
+import { writeFile } from "fs/promises";
 import { NextResponse } from "next/server";
-import path from "path";
+import fs from "fs";
 
-function sanitizeFilename(name) {
-  return name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_.]/g, "");
-}
+
 
 // ✅ GET: Fetch single or all blogs
 export async function GET(request) {
@@ -22,7 +19,7 @@ export async function GET(request) {
       if (!blog) {
         return NextResponse.json({ success: false, msg: "Blog not found" }, { status: 404 });
       }
-      return NextResponse.json({ success: true, data: blog });
+      return NextResponse.json(blog);
     }
 
     if (isCountOnly === "true") {
@@ -30,8 +27,8 @@ export async function GET(request) {
       return NextResponse.json({ success: true, total });
     }
 
-    const blogs = await BlogModel.find({}).sort({ createdAt: -1 });
-    return NextResponse.json({ success: true, data: blogs });
+    const blogs = await BlogModel.find({});
+    return NextResponse.json({ success: true, blogs });
 
   } catch (error) {
     console.error("GET error:", error);
@@ -41,7 +38,9 @@ export async function GET(request) {
 
 // ✅ POST: Create a new blog
 export async function POST(request) {
+ 
   try {
+
     await connectDB();
     const formData = await request.formData();
     const timestamp = Date.now();
@@ -51,30 +50,26 @@ export async function POST(request) {
       return NextResponse.json({ success: false, msg: "Valid image is required" }, { status: 400 });
     }
 
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
-    if (!allowedTypes.includes(image.type)) {
-      return NextResponse.json({ success: false, msg: "Only JPG, PNG, WEBP allowed" }, { status: 400 });
-    }
+    const imageArrayBuffer = await image.arrayBuffer();
+    const buffer = Buffer.from(imageArrayBuffer);
 
-    const cleanName = sanitizeFilename(image.name);
-    const fileName = `${timestamp}_${cleanName}`;
-    const filePath = path.join(process.cwd(), "public", fileName);
+    const fileName = `${timestamp}_${image.name}`;
+    const filePath = `./public/${fileName}`;
     const imageUrl = `/${fileName}`;
 
-    const buffer = Buffer.from(await image.arrayBuffer());
     await writeFile(filePath, buffer);
 
     const blogData = {
       title: formData.get("title"),
       description: formData.get("description"),
-      category: formData.get("category") || "",
-      author: formData.get("author") || "",
+      category: formData.get("category"),
+      author: formData.get("author"),
       image: imageUrl,
-      authorImg: formData.get("authorImg") || "",
+      authorImg: formData.get("authorImg"),
     };
 
     if (!blogData.title || !blogData.description) {
-      return NextResponse.json({ success: false, msg: "Title and description required" }, { status: 400 });
+      return NextResponse.json({ success: false, msg: "Title and description are required" }, { status: 400 });
     }
 
     await BlogModel.create(blogData);
@@ -91,9 +86,9 @@ export async function DELETE(request) {
   try {
     await connectDB();
 
-    const id = request.nextUrl.searchParams.get("id");
+    const id = request.nextUrl.searchParams.get('id');
     if (!id) {
-      return NextResponse.json({ success: false, msg: "Blog ID required" }, { status: 400 });
+      return NextResponse.json({ success: false, msg: "Blog ID is required" }, { status: 400 });
     }
 
     const blog = await BlogModel.findById(id);
@@ -101,12 +96,10 @@ export async function DELETE(request) {
       return NextResponse.json({ success: false, msg: "Blog not found" }, { status: 404 });
     }
 
-    const imagePath = path.join(process.cwd(), "public", blog.image.replace("/", ""));
-    try {
-      await unlink(imagePath);
-    } catch (err) {
-      console.warn("Failed to delete image:", err.message);
-    }
+    const imagePath = `./public${blog.image}`;
+    fs.unlink(imagePath, (err) => {
+      if (err) console.error("Image delete error:", err);
+    });
 
     await BlogModel.findByIdAndDelete(id);
     return NextResponse.json({ success: true, msg: "Blog Deleted Successfully" });
