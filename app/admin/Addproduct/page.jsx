@@ -1,14 +1,13 @@
-"use client"; 
+"use client";
 
-import { assets } from "@/Assets/assets";
-import axios from "axios";
-import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
+import Image from "next/image";
+import { assets } from "@/Assets/assets"; // Make sure assets.upload_area is valid
 
 const Page = () => {
   const [image, setImage] = useState(null);
-  const [data, setData] = useState({
+  const [form, setForm] = useState({
     title: "",
     description: "",
     category: "Backend",
@@ -16,16 +15,12 @@ const Page = () => {
     authorImg: "/author_img.png",
   });
 
-
-  const onChangeHandler = (event) => {
-    const { name, value } = event.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onSubmitHandler = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!image) {
@@ -33,125 +28,118 @@ const Page = () => {
       return;
     }
 
+    const formData = new FormData();
+    formData.append("image", image);
+    Object.keys(form).forEach((key) => {
+      formData.append(key, form[key]);
+    });
+
     try {
-      const formData = new FormData();
-      formData.append("title", data.title);
-      formData.append("description", data.description);
-      formData.append("category", data.category);
-      formData.append("author", data.author);
-      formData.append("authorImg", data.authorImg);
-      formData.append("image", image);
+      const res = await fetch("/api/blog", {
+        method: "POST",
+        body: formData,
+      });
 
-      const response = await axios.post("/api/blog", formData);
+      const result = await res.json();
+      if (result.success) {
+        toast.success(result.msg || "Blog added successfully!");
 
-      if (response.data.success) {
-        toast.success(response.data.msg || "Blog added successfully.");
-        setData({
+        setForm({
           title: "",
           description: "",
-          category: "Frontend",
-          author: "Rahul",
+          category: "Backend",
+          author: "Adarsh Narayan",
           authorImg: "/author_img.png",
         });
         setImage(null);
       } else {
-        toast.error(response.data.msg || "Error adding blog.");
+        toast.error(result.msg || "Failed to add blog.");
       }
-    } catch (error) {
-      toast.error("Server error. Please try again.");
-      console.error("Error submitting form:", error);
+    } catch (err) {
+      console.error("Submit error:", err);
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
   return (
-  <form
-  onSubmit={onSubmitHandler}
-  className="max-w-5xl w-full mx-auto mt-10 p-6 sm:p-10 bg-white rounded-xl shadow-md"
->
-  <h2 className="text-2xl font-bold text-gray-800 mb-6">Add New Blog Post</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-5xl w-full mx-auto mt-10 p-6 sm:p-10 bg-white rounded-xl shadow-md"
+    >
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">Add New Blog Post</h2>
 
-  {/* Thumbnail Upload */}
-  <label htmlFor="image" className="block text-lg font-medium text-gray-800">
-    Upload Thumbnail
-    <div className="mt-3">
-      <Image
-        src={image ? URL.createObjectURL(image) : assets.upload_area}
-        width={200}
-        height={100}
-        alt="Thumbnail Preview"
-        className="rounded-lg border-2 border-dashed border-gray-300 cursor-pointer hover:opacity-80 transition duration-300"
+      {/* Upload Thumbnail */}
+      <label htmlFor="image" className="block text-lg font-medium text-gray-800 mb-2">
+        Upload Thumbnail
+      </label>
+      <div className="mb-6 cursor-pointer">
+        <Image
+          src={image ? URL.createObjectURL(image) : assets.upload_area}
+          alt="Thumbnail Preview"
+          width={200}
+          height={100}
+          className="rounded-lg border-2 border-dashed border-gray-300 hover:opacity-80 transition duration-300"
+          onClick={() => document.getElementById("imageInput").click()}
+        />
+        <input
+          type="file"
+          id="imageInput"
+          hidden
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
+      </div>
+
+      {/* Blog Title */}
+      <label className="block text-lg font-medium text-gray-800 mb-2">Blog Title</label>
+      <input
+        name="title"
+        type="text"
+        placeholder="Enter blog title"
+        value={form.title}
+        onChange={handleChange}
+        className="w-full p-3 border border-gray-300 rounded-md bg-white mb-6"
+        required
       />
-    </div>
-  </label>
 
-  <input
-    onChange={(e) => setImage(e.target.files[0])}
-    type="file"
-    id="image"
-    hidden
-    accept="image/*"
-    required
-  />
+      {/* Blog Description */}
+      <label className="block text-lg font-medium text-gray-800 mb-2">Blog Description</label>
+      <textarea
+        name="description"
+        placeholder="Write your blog description here..."
+        value={form.description}
+        onChange={handleChange}
+        rows={6}
+        className="w-full p-3 border border-gray-300 rounded-md bg-white mb-6"
+        required
+      />
 
-  {/* Blog Title */}
-  <label className="block mt-6 text-lg font-medium text-gray-800">
-    Blog Title
-    <input
-      name="title"
-      onChange={onChangeHandler}
-      value={data.title}
-      className="mt-2 w-full px-4 py-3 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-      type="text"
-      placeholder="Enter blog title"
-      required
-    />
-  </label>
+      {/* Blog Category */}
+      <label className="block text-lg font-medium text-gray-800 mb-2">Blog Category</label>
+      <select
+        name="category"
+        value={form.category}
+        onChange={handleChange}
+        className="w-full sm:w-1/2 p-3 border border-gray-300 rounded-md bg-white mb-6"
+      >
+        <option value="Frontend">Frontend</option>
+        <option value="Backend">Backend</option>
+        <option value="Git/GitHub">Git/GitHub</option>
+        <option value="DevOps">DevOps</option>
+        <option value="Other">Other</option>
+      </select>
 
-  {/* Blog Description */}
-  <label className="block mt-6 text-lg font-medium text-gray-800">
-    Blog Description
-    <textarea
-      name="description"
-      onChange={onChangeHandler}
-      value={data.description}
-      className="mt-2 w-full px-4 py-3 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-      rows={6}
-      placeholder="Write blog content here"
-      required
-    />
-  </label>
-
-  {/* Blog Category */}
-  <label className="block mt-6 text-lg font-medium text-gray-800">
-    Blog Category <br />
-    <select
-      name="category"
-      onChange={onChangeHandler}
-      value={data.category}
-      className="mt-2 w-full sm:w-1/2 px-4 py-3 rounded-md border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    >
-      <option value="Frontend">Frontend</option>
-      <option value="Backend">Backend</option>
-      <option value="Git/GitHub">Git/GitHub</option>
-    </select>
-  </label>
-
-  {/* Submit Button */}
-  <div className="mt-8 flex justify-center sm:justify-start">
-    <button
-      type="submit"
-      className="w-full sm:w-40 py-3 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition duration-300"
-    >
-      Add
-    </button>
-  </div>
-</form>
-
-
+      {/* Submit Button */}
+      <div className="mt-6 flex justify-center sm:justify-start">
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-semibold transition"
+        >
+          Add Blog
+        </button>
+      </div>
+    </form>
   );
 };
 
 export default Page;
-
-
- 
