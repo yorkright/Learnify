@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <SessionWrapper>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className=" min-h-[77vh] bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] text-white " >
+        <div className=" min-h-[77vh]  " >
         <Navbar/>
         {children}
      </div>
