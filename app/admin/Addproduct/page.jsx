@@ -72,6 +72,18 @@ const Page = () => {
       onSubmit={onSubmitHandler}
       className="max-w-5xl w-full mx-auto mt-10 p-6 sm:p-10 bg-white rounded-xl shadow-md"
     >
+ <br /><br /><br />
+      <a
+        href="/admin"
+        className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-white border border-gray-300 text-gray-700 font-semibold shadow hover:bg-gray-100 hover:text-blue-600 transition-all duration-200 text-base"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Admin
+      </a>
+       <br /><br /><br />
+
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Add New Blog Post</h2>
 
       {/* Upload Thumbnail */}
