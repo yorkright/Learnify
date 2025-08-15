@@ -45,7 +45,7 @@ const Page = ({ params: paramsPromise }) => {
   }
 
   return (
-    <div className="min-h-screen pt-24 text-black sm:bg-gray-100">
+    <div className="min-h-screen pt-24 text-black sm:text-white sm:bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <h1 className="text-4xl md:text-5xl font-bold text-center mt-10 max-w-4xl mx-auto leading-tight mb-6">
